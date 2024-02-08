@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "InterviewBotvirtual"
+version = "0.1.0"
+description = ""
+authors = ["Sikan777 <sikanbog@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.109.2"
+unicorn = {extras = ["standard"], version = "^2.0.1.post1"}
+pydantic = "^2.6.1"
+
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
