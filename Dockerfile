@@ -10,10 +10,10 @@ WORKDIR $APP_HOME
 COPY . .
 
 # Встановимо залежності всередині контейнера
-RUN pip install -r requirements.txt
+RUN poetry shell
 
 # Позначимо порт, де працює застосунок всередині контейнера
 EXPOSE 8000
 
 # Запустимо наш застосунок всередині контейнера
-ENTRYPOINT ["python", "app.py"]
+ENTRYPOINT ["python", "main.py"]
