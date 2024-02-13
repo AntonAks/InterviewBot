@@ -1,24 +1,45 @@
 from typing import Union
-
+import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
 
 app = FastAPI()
 
-class Item(BaseModel):
-    name:str
-    price:float
+class Question(BaseModel):
+    questoin:str
+    is_offer: Union[bool, None] = None
+
+class Answer(BaseModel):
+    answer:str
+    is_offer: Union[bool, None] = None
+
+class Result(BaseModel):
+    result:str
     is_offer: Union[bool, None] = None
 
 @app.get("/")
 async def read_root():
-    return {"Hello": "World"}
+    return {"message": "Please enter url: http://127.0.0.1:8000/docs"}
 
+# create Question
+@app.get("/question/{question_id}")
+async def read_question(question_id: int, q: Union[str, None] = None):
+    return {"question_id": question_id, "q": q}
 
-@app.get("/items/{item_id}")
-async def read_item(_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+@app.post("/question/{item_id}")
+async def update_question(question_id: int, question: Question):
+    return {question_id: int, "question": question}
 
-@app.put("/items/{item_id}") #створюємо ПУТ для запису
-async def update_item(item_id: int, item: Item):
-    return {"item_name": item.pr, "item_id": item_id}
+# Create Answer
+@app.post("/answer/{answer_id}")
+async def write_answer(answer_id: int, answer: Answer):
+    return {"answer_id": answer_id, "answer": answer}
+
+#Create Result
+@app.get("/result/{result_id}")
+async def show_result(result_id: int, result: Result):
+    return {"result_id": result_id, "result": result}
+
+#Run python main.py
+if __name__ == "__main__":
+    uvicorn.run("main:app", port=8000, host="127.0.0.1", reload=True)
