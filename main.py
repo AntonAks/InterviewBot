@@ -1,5 +1,5 @@
 from typing import Union
-
+import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -39,3 +39,7 @@ async def write_answer(answer_id: int, answer: Answer):
 @app.get("/result/{result_id}")
 async def show_result(result_id: int, result: Result):
     return {"result_id": result_id, "result": result}
+
+#Run python main.py
+if __name__ == "__main__":
+    uvicorn.run("main:app", port=8000, host="127.0.0.1", reload=True)
