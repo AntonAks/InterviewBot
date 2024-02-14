@@ -1,45 +1,25 @@
-from typing import Union
 import uvicorn
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, APIRouter
+from views.question import router as question_router
+from views.answer import router as answer_router
+from views.result import router as result_router
 
-app = FastAPI()
 
-class Question(BaseModel):
-    questoin:str
-    is_offer: Union[bool, None] = None
+app = FastAPI(title="Interview Bot API", version="1.0.0")
 
-class Answer(BaseModel):
-    answer:str
-    is_offer: Union[bool, None] = None
-
-class Result(BaseModel):
-    result:str
-    is_offer: Union[bool, None] = None
 
 @app.get("/")
-async def read_root():
-    return {"message": "Please enter url: http://127.0.0.1:8000/docs"}
+def read_root():
+    return {"Hello": "World"}
 
-# create Question
-@app.get("/question/{question_id}")
-async def read_question(question_id: int, q: Union[str, None] = None):
-    return {"question_id": question_id, "q": q}
 
-@app.post("/question/{item_id}")
-async def update_question(question_id: int, question: Question):
-    return {question_id: int, "question": question}
+api_router = APIRouter()
+api_router.include_router(question_router)
+api_router.include_router(answer_router)
+api_router.include_router(result_router)
 
-# Create Answer
-@app.post("/answer/{answer_id}")
-async def write_answer(answer_id: int, answer: Answer):
-    return {"answer_id": answer_id, "answer": answer}
+app.include_router(api_router, prefix="/api",)
 
-#Create Result
-@app.get("/result/{result_id}")
-async def show_result(result_id: int, result: Result):
-    return {"result_id": result_id, "result": result}
-
-#Run python main.py
+# Run python main.py
 if __name__ == "__main__":
     uvicorn.run("main:app", port=8000, host="127.0.0.1", reload=True)
