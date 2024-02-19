@@ -2,15 +2,17 @@ version: '3'
 
 services:
   web:
-    build: .  # Путь к директории с вашим FastAPI приложением
+    build: .
     ports:
-      - "8000:8000"  # Проброс портов - порт FastAPI приложения в контейнере и порт хоста
+      - "8000:8000"
     depends_on:
-      - db  # Указание на то, что этот сервис зависит от сервиса "db"
+      - db
 
   db:
-    image: postgres:latest  # Используем образ PostgreSQL
+    image: postgres:latest
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_USER: myuser  # Имя пользователя PostgreSQL
-      POSTGRES_PASSWORD: mypassword  # Пароль пользователя PostgreSQL
-      POSTGRES_DB: mydatabase  # Имя базы данных PostgreSQL
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456789
+      POSTGRES_DB: hww11

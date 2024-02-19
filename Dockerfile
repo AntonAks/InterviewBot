@@ -23,4 +23,6 @@ COPY ./tests /code/tests
 COPY ./views /code/views
 COPY ./main.py /code/
 
+EXPOSE 8000
+
 CMD ["python", "main.py"]
