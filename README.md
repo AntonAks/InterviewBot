@@ -12,6 +12,13 @@ First clone this repository to your computer:
 ```
 git clone https://github.com/AntonAks/InterviewBot.git
 ```
+
+Starts docker-compose:
+```
+docker-compose up -d
+```
+
+
 Go to the project directory:
 ```
 cd InterviewBot
