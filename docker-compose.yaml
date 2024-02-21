@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    env_file:
+      - config/.env.local
+    image: postgres:latest
+    ports:
+      - "5432:5432"
