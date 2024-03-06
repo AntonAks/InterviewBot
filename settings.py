@@ -3,8 +3,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from dotenv import dotenv_values
 
 config = {
-    **dotenv_values(".env.local"),
-    **dotenv_values(".env"),
+    **dotenv_values("config/.env.local"),
+    **dotenv_values("config/.env"),
     **os.environ,  # override loaded values with environment variables
 }
 
@@ -15,12 +15,19 @@ class Settings(BaseSettings):
     db_password: str | None = config.get("POSTGRES_PASSWORD")
     db_name: str | None = config.get("POSTGRES_DB")
 
+    if not os.environ.get('TESTING'):
+        DATABASE_URL: str = f"postgresql://{db_user}:{db_password}@db:5432/{db_name}"
+    else:
+        DATABASE_URL: str = f"sqlite:///./tests/test_db.db"
+
+
     # openai settings
     open_ai_key: str | None = config.get("OPEN_AI_KEY")
     open_ai_model: str | None = config.get("OPEN_AI_MODEL")
     open_ai_max_tokens: int | None = config.get("OPEN_AI_MAX_TOKENS")
 
     model_config = SettingsConfigDict()
+
 
 
 settings = Settings()
