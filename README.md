@@ -18,3 +18,8 @@ Run docker-compose build:
 ```
 docker-compose up
 ```
+
+Run tests:
+```
+pytest tests -v
+```
