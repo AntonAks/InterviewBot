@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     else:
         DATABASE_URL: str = f"sqlite:///./tests/test_db.db"
 
+    # api settings
+    api_url: str = config.get("API_URL")
 
     # openai settings
     open_ai_key: str | None = config.get("OPEN_AI_KEY")
