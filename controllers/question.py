@@ -3,6 +3,7 @@ from schemas.question import CreateQuestion, GetQuestion
 from datetime import datetime, timezone
 from models.question import Question
 from sqlalchemy.orm import Session
+from exceptions.base import NotFoundError
 
 
 class QuestionController:
@@ -26,6 +27,8 @@ class QuestionCreateController(QuestionController):
 class QuestionGetController(QuestionController):
     def get_question(self, question_id: int) -> GetQuestion:
         question = self.db_session.query(Question).where(Question.id == question_id).scalar()
+        if question is None:
+            raise NotFoundError(details=f"Question not found. ID: {question_id}")
         return GetQuestion(**question.__dict__)
 
 
