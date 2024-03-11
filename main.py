@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI, APIRouter, Request
 from views.question import router as question_router
 from views.answer import router as answer_router
@@ -26,3 +27,7 @@ def exception_handler(request: Request, exc: NotFoundError):
         status_code=404,
         content={"message": f"{exc.details}"},
     )
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", port=8000, host="0.0.0.0", reload=True)

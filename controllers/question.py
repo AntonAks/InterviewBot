@@ -10,6 +10,10 @@ class QuestionController:
     def __init__(self, db_session: Session):
         self.db_session = db_session
 
+    def is_exists(self, question_id: int) -> bool:
+        is_exists = self.db_session.query(Question).filter(Question.id == question_id).scalar() is not None
+        return is_exists
+
 
 class QuestionCreateController(QuestionController):
     def add_question(self, question: CreateQuestionSchema) -> Question:

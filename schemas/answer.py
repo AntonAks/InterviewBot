@@ -7,6 +7,6 @@ class AnswerSchema(BaseModel):
     text: str
 
 
-class CreateAnswerSchema(AnswerSchema):
+class CreateAnswerSchema(BaseModel):
     text: str
     question_id: int
