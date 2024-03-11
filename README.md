@@ -23,3 +23,13 @@ Run tests:
 ```
 pytest tests -v
 ```
+
+
+Populate test questions (only when app is running):
+```
+cd _data
+```
+```
+python populate_questions.py
+```
+

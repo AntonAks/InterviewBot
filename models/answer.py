@@ -1,14 +1,17 @@
+from uuid import uuid4
 from datetime import datetime
 from sqlalchemy import Integer
+from sqlalchemy.schema import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.types import String, DateTime
+from sqlalchemy.types import String, DateTime, UUID
 from database.db import Base
 
 
-class Question(Base):
-    __tablename__ = 'questions'
+class Answer(Base):
+    __tablename__ = 'answers'
 
     id: Mapped[Integer] = mapped_column(Integer, autoincrement=True, primary_key=True, index=True)
     text: Mapped[str] = mapped_column(String(1024), nullable=False)
-    level: Mapped[str] = mapped_column(String(64), nullable=False)
+    question_id: Mapped[Integer] = mapped_column(ForeignKey("questions.id"))
+    result_id: Mapped[UUID] = mapped_column(UUID, nullable=False, default=uuid4)
     created_at: Mapped[datetime] = mapped_column(DateTime)

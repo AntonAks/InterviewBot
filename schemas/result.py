@@ -2,6 +2,6 @@ from uuid import UUID
 from pydantic import BaseModel
 
 
-class Result(BaseModel):
+class ResultSchema(BaseModel):
     id: UUID
     details: dict
