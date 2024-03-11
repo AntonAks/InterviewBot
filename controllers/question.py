@@ -1,5 +1,5 @@
 from random import choice
-from schemas.question import CreateQuestion, GetQuestion
+from schemas.question import CreateQuestionSchema, GetQuestionSchema
 from datetime import datetime, timezone
 from models.question import Question
 from sqlalchemy.orm import Session
@@ -12,8 +12,7 @@ class QuestionController:
 
 
 class QuestionCreateController(QuestionController):
-    def add_question(self, question: CreateQuestion) -> Question:
-        print("CreateQuestion >>>>>>>>>>>>>>>>>>>>", CreateQuestion)
+    def add_question(self, question: CreateQuestionSchema) -> Question:
         new_question = Question(
             text=question.text,
             level=question.level.value,
@@ -25,11 +24,11 @@ class QuestionCreateController(QuestionController):
 
 
 class QuestionGetController(QuestionController):
-    def get_question(self, question_id: int) -> GetQuestion:
+    def get_question(self, question_id: int) -> GetQuestionSchema:
         question = self.db_session.query(Question).where(Question.id == question_id).scalar()
         if question is None:
             raise NotFoundError(details=f"Question not found. ID: {question_id}")
-        return GetQuestion(**question.__dict__)
+        return GetQuestionSchema(**question.__dict__)
 
 
 class QuestionGetRandomController(QuestionController):
@@ -37,5 +36,5 @@ class QuestionGetRandomController(QuestionController):
         questions_count = self.db_session.query(Question).count()
         _id = choice(range(questions_count))+1
         question = self.db_session.query(Question).where(Question.id == _id).scalar()
-        return GetQuestion(**question.__dict__)
+        return GetQuestionSchema(**question.__dict__)
 

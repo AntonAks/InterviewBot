@@ -2,10 +2,11 @@ from uuid import UUID
 from pydantic import BaseModel
 
 
-class Answer(BaseModel):
-    id: UUID
+class AnswerSchema(BaseModel):
+    id: UUID | None = None
     text: str
 
 
-class CreateAnswer(BaseModel):
+class CreateAnswerSchema(AnswerSchema):
     text: str
+    question_id: int

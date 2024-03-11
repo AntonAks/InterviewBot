@@ -1,11 +1,10 @@
-import uvicorn
 from fastapi import FastAPI, APIRouter, Request
 from views.question import router as question_router
 from views.answer import router as answer_router
 from views.result import router as result_router
 from database.db import engine, Base
 from fastapi.responses import JSONResponse
-from exceptions.base import BaseError, NotFoundError
+from exceptions.base import NotFoundError
 
 
 app = FastAPI(title="Interview Bot API", version="1.0.0")

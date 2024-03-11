@@ -9,16 +9,16 @@ class QuestionLevel(Enum):
     SENIOR = 'Senior'
 
 
-class Question(BaseModel):
+class QuestionSchema(BaseModel):
     id: int | None = None
     text: str
     level: QuestionLevel
 
 
-class CreateQuestion(BaseModel):
+class CreateQuestionSchema(BaseModel):
     text: str
     level: QuestionLevel
 
 
-class GetQuestion(Question):
+class GetQuestionSchema(QuestionSchema):
     created_at: datetime
