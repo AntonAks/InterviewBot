@@ -1,5 +1,6 @@
 from uuid import uuid4
 from schemas.question import QuestionLevel
+from tests.mock_stuff.answers import mock_oai_client_answer_check, ANSWER_TEXT, QUESTION_TEXT, HOW_TO_IMPROVE
 
 
 class TestAnswers:
@@ -11,6 +12,7 @@ class TestAnswers:
         assert response.status_code == 200
         assert json_response["id"] == str(_id)
 
+    @mock_oai_client_answer_check
     def test_post_answers__success(self, test_client):
         _text = "Example Text"
 
@@ -18,7 +20,7 @@ class TestAnswers:
         test_client.post(
             f"/api/question",
             json={
-                "text": "Test Question",
+                "text": QUESTION_TEXT,
                 "level": QuestionLevel.MIDDLE.value
             }
         )
@@ -26,14 +28,17 @@ class TestAnswers:
         response = test_client.post(
             f"/api/answer",
             json={
-                "text": _text,
+                "text": ANSWER_TEXT,
                 "question_id": 1
             }
         )
         json_response = response.json()
 
         assert response.status_code == 201
-        assert json_response['answer'] == 'Your answer accepted for question with ID: 1 was created'
+        assert json_response['question'] == QUESTION_TEXT
+        assert json_response['answer'] == ANSWER_TEXT
+        assert json_response['estimation'] == "3/10"
+        assert json_response['how_to_improve'] == HOW_TO_IMPROVE
 
     def test_post_answers__question_error(self, test_client):
         _text = "Example Text"

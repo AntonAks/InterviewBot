@@ -10,5 +10,5 @@ class ResultSchema(BaseModel):
 class ResultAfterCheck(BaseModel):
     question: str
     answer: str
-    estimation: int
+    estimation: str
     how_to_improve: str
