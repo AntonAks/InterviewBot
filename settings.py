@@ -31,5 +31,4 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict()
 
 
-
 settings = Settings()

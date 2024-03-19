@@ -4,6 +4,8 @@ from schemas.answer import AnswerSchema, CreateAnswerSchema
 from controllers.answer import AnswerCreateController
 from sqlalchemy.orm import Session
 from database.db import get_db
+from services.check_answer.engine import CheckEngine
+from schemas.result import ResultAfterCheck
 
 
 router = APIRouter(tags=["Answer"])
@@ -16,7 +18,9 @@ async def get_answer(answer_id: UUID) -> AnswerSchema:
 
 @router.post("/answer", status_code=201)
 async def create_answer(answer: CreateAnswerSchema,
-                        db_session: Session = Depends(get_db)):
+                        db_session: Session = Depends(get_db)) -> ResultAfterCheck:
     controller = AnswerCreateController(db_session)
     new_answer = controller.create_answer(answer)
-    return {"answer": f"Your answer accepted for question with ID: {new_answer.question_id} was created"}
+    check_engine = CheckEngine(db_session=db_session)
+    result = check_engine.check_answer(new_answer)
+    return result
