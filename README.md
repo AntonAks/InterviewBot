@@ -1,44 +1,35 @@
 # InterviewBot
-
-
-
-
-InterviewBot - is a Python program for interviewing candidates. It allows you to create questions, record candidates' answers and save interview results.
+InterviewBot - is a Python program for interviewing candidates. 
+It allows you to create questions, record candidates' answers and save interview results.
 
 ## Installation
 
-First clone this repository to your computer:
-
+First clone this repository:
 ```
 git clone https://github.com/AntonAks/InterviewBot.git
 ```
 
-Starts docker-compose:
+Run docker-compose build:
 ```
-docker-compose up -d
+docker-compose build
+```
+
+Run docker-compose build:
+```
+docker-compose up
+```
+
+Run tests:
+```
+pytest tests -v
 ```
 
 
-Go to the project directory:
+Populate test questions (only when app is running):
 ```
-cd InterviewBot
+cd _data
 ```
-
-Activate your Poetry virtual environment:
 ```
-poetry shell
+python populate_questions.py
 ```
 
-Install dependencies:
-```
-poetry install fastapi, uvicorn, asyncpg,
-```
-
-## Using
-Run the main program file:
-```
-python main.py
-```
-Go to http://localhost:8000/docs in your web browser.
-
-Now you can create questions, conduct interviews and view results through the user interface.

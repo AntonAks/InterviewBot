@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "text": "What is a data type, and what types exist in Python?",
+      "level": "Junior"
+    },
+    {
+      "text": "What are the differences between lists and sets in Python?",
+      "level": "Junior"
+    },
+    {
+      "text": "How to use loops in Python to process lists?",
+      "level": "Junior"
+    },
+    {
+      "text": "What are the fundamental principles of OOP implemented in Python?",
+      "level": "Middle"
+    },
+    {
+      "text": "How to use decorators in Python functions?",
+      "level": "Middle"
+    },
+    {
+      "text": "What are lambda functions, and in what cases are they useful?",
+      "level": "Middle"
+    },
+    {
+      "text": "How does memory management work in Python, and why is it important?",
+      "level": "Middle"
+    },
+    {
+      "text": "How does the Global Interpreter Lock (GIL) mechanism work in Python, and how does it affect multitasking?",
+      "level": "Senior"
+    },
+    {
+      "text": "How to use metaclasses in Python, and in what cases is it useful?",
+      "level": "Senior"
+    }
+  ]
+}

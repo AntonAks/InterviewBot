@@ -1,11 +1,24 @@
-from uuid import UUID
 from pydantic import BaseModel
+from datetime import datetime
+from enum import Enum
 
 
-class Question(BaseModel):
-    id: UUID
+class QuestionLevel(Enum):
+    JUNIOR = 'Junior'
+    MIDDLE = 'Middle'
+    SENIOR = 'Senior'
+
+
+class QuestionSchema(BaseModel):
+    id: int | None = None
     text: str
+    level: QuestionLevel
 
 
-class CreateQuestion(BaseModel):
+class CreateQuestionSchema(BaseModel):
     text: str
+    level: QuestionLevel
+
+
+class GetQuestionSchema(QuestionSchema):
+    created_at: datetime
