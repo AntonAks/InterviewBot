@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from database.db import get_db
 from services.check_answer.engine import CheckEngine
 from schemas.result import ResultAfterCheck
-
+from celery_worker import dummy_task
 
 router = APIRouter(tags=["Answer"])
 
@@ -19,6 +19,8 @@ async def get_answer(answer_id: UUID) -> AnswerSchema:
 @router.post("/answer", status_code=201)
 async def create_answer(answer: CreateAnswerSchema,
                         db_session: Session = Depends(get_db)) -> ResultAfterCheck:
+
+    dummy_task.delay()
     controller = AnswerCreateController(db_session)
     new_answer = controller.create_answer(answer)
     check_engine = CheckEngine(db_session=db_session)

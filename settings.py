@@ -28,6 +28,10 @@ class Settings(BaseSettings):
     open_ai_model: str | None = config.get("OPEN_AI_MODEL")
     open_ai_max_tokens: int | None = config.get("OPEN_AI_MAX_TOKENS")
 
+    # celery config
+    celery_broker_url: str | None = config.get("CELERY_BROKER_URL")
+    celery_result_url: str | None = config.get("CELERY_RESULT_BACKEND")
+
     model_config = SettingsConfigDict()
 
 
