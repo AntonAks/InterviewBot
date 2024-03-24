@@ -8,7 +8,10 @@ from fastapi.responses import JSONResponse
 from exceptions.base import NotFoundError
 
 
+
 app = FastAPI(title="Interview Bot API", version="1.0.0")
+
+
 
 Base.metadata.create_all(bind=engine)
 

@@ -6,7 +6,6 @@ class AnswerSchema(BaseModel):
     id: UUID | None = None
     text: str
 
-
 class CreateAnswerSchema(BaseModel):
     text: str
     question_id: int

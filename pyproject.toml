@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "InterviewBotvirtual"
+version = "0.1.0"
+description = ""
+authors = ["Sikan777 <sikanbog@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.109.2"
+pydantic = "^2.6.1"
+uvicorn = {extras = ["standard"], version = "^0.27.0.post1"}
+pytest = "^8.0.0"
+httpx = "^0.26.0"
+openai = "1.12.0"
+pydantic-settings = "^2.2.1"
+sqlalchemy = "^2.0.27"
+sqlalchemy-utils = "^0.41.1"
+psycopg2-binary = "^2.9.9"
+pytest-env = "^1.1.3"
+requests = "^2.31.0"
+celery = "^5.3.6"
+redis = "^5.0.3"
+flower = "^2.0.1"
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

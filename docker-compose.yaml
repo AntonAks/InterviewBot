@@ -17,3 +17,47 @@ services:
       - "5432:5432"
 #    volumes:
 #      - /postgres-data:/var/lib/postgresql/data
+
+#  rabbitmq:
+#   image: "rabbitmq"
+#   container_name: rabbitmq
+#   ports:
+#     - "5672:5672"
+#     - "15672:15672"
+#   depends_on:
+#     - app
+
+  redis:
+    image: "redis"
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    depends_on:
+      - web
+
+  celery_worker:
+    container_name: celery_worker
+    build: .
+    command: celery -A celery_worker worker -B --loglevel=info
+    volumes:
+      - .:/app
+    env_file:
+      - config/.env.local
+    depends_on:
+      - web
+      - redis
+
+  # Apart from that add flower
+  flower:
+    build: .
+    command: celery -A celery_worker flower --port=5555 # I don't know
+    ports:
+      - "5556:5555"
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379
+      - CELERY_RESULT_BACKEND=redis://redis:6379
+    depends_on:
+      - web
+      - redis
+      - celery_worker
